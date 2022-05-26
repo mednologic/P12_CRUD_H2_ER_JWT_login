@@ -1,5 +1,6 @@
 package es.http.service.dto;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,8 +12,11 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	@Column(name = "username")
 	private String username;
+	@Column (name = "password")
 	private String password;
+	@Column (name = "role")
 	private String role;
 
 

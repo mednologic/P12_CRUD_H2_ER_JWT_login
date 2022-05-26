@@ -32,7 +32,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 	}
 
 	@Override
-	protected void configure(HttpSecurity httpSecurity) throws Exception {
+	protected void configure(HttpSecurity http) throws Exception {
 		/*
 		 * 1. Se desactiva el uso de cookies
 		 * 2. Se activa la configuración CORS con los valores por defecto
@@ -40,11 +40,15 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 		 * 4. Se indica que el login no requiere autenticación
 		 * 5. Se indica que el resto de URLs esten securizadas
 		 */
-		httpSecurity
+		/*http.authorizeRequests()
+			.antMatchers("/**").hasRole("USER") //** es todos los campos nested a la raiz*/
+		http
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 			.cors().and()
 			.csrf().disable()
-			.authorizeRequests().antMatchers(HttpMethod.POST, LOGIN_URL).permitAll()
+			.authorizeRequests()
+			.antMatchers(HttpMethod.POST, LOGIN_URL).permitAll()
+			.antMatchers("/users/").anonymous() //Permitimos crear un usuario anonimamente
 			.anyRequest().authenticated().and()
 				.addFilter(new JWTAuthenticationFilter(authenticationManager()))
 				.addFilter(new JWTAuthorizationFilter(authenticationManager()));

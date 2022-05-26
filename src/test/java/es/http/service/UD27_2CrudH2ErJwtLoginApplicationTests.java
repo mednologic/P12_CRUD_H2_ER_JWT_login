@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class P12CrudH2ErJwtLoginApplicationTests {
+class UD27_2CrudH2ErJwtLoginApplicationTests {
 
 	@Test
 	void contextLoads() {
